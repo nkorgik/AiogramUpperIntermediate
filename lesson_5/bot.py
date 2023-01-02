@@ -10,9 +10,20 @@ bot = Bot(token=TOKEN_API) # создание экземпляра бота
 dp = Dispatcher(bot=bot) # создание экземпляра диспетчера
 
 
-@dp.message_handler() # получение объекта декоратора
-async def count_symbols(msg: types.Message) -> None: # объявление функции обработчика
-    await msg.answer(len(msg.text) - msg.text.count(' ')) # ответ пользователю, где msg - объект сообщения, которое он нам отправил
+@dp.message_handler(content_types='sticker')
+async def sticker_process(msg: types.Message) -> None:
+    await msg.answer(msg.sticker.file_id)
+
+
+@dp.message_handler(content_types='text')
+async def text_process(msg: types.Message) -> None:
+    await msg.answer(msg.text)
+    await msg.answer_sticker(sticker="CAACAgQAAxkBAANfY7PtwRzhrqROe704qlzPwDG4_dcAApsAA845CA2oET26FvUGbS0E")
+
+
+# @dp.message_handler() # получение объекта декоратора
+# async def count_symbols(msg: types.Message) -> None: # объявление функции обработчика
+#     await msg.answer(len(msg.text) - msg.text.count(' ')) # ответ пользователю, где msg - объект сообщения, которое он нам отправил
 
 
 if __name__ == "__main__": # классическая идиома языка питон для непосредственного запуска модуля
