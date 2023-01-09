@@ -3,9 +3,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 def get_kb() -> ReplyKeyboardMarkup:
     kb = ReplyKeyboardMarkup([
-        [KeyboardButton('KB 1'), KeyboardButton('KB 2'), KeyboardButton('KB 3')],
-        [KeyboardButton('KB 4'), KeyboardButton('KB 5'), KeyboardButton('KB 6')],
-        [KeyboardButton('KB 7'), KeyboardButton('KB 8'), KeyboardButton('KB 9')],
+        [KeyboardButton(row + column) for row in range(50)] for column in range(50)
     ])
 
     return kb

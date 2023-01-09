@@ -1,6 +1,7 @@
 import os
 from PIL import ImageGrab
 import secrets
+from aiogram.dispatcher import filters
 from aiogram import Dispatcher, executor, types, Bot # импорт основных элементов библиотеки
 # Dispatcher - класс для создания диспетчера, отслеживающего обновления
 # executor - объект по исполнению каких-либо задач
@@ -11,6 +12,11 @@ from kbs import get_kb
 
 bot = Bot(token=TOKEN_API) # создание экземпляра бота
 dp = Dispatcher(bot=bot) # создание экземпляра диспетчера
+
+
+@dp.message_handler(filters.IsReplyFilter(is_reply='key'))
+async def process_update(msg: types.Message) -> None:
+    await msg.answer('Hello World!')
 
 
 @dp.message_handler(commands=['start'])
